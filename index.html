@@ -911,15 +911,6 @@ gateIn.addEventListener('keydown', function(e){ if(e.key === 'Enter') tryGate() 
 
   <div class="divider reveal"><span>✦</span></div>
 
-  <!-- OS NOSSOS LUGARES -->
-  <section class="sec">
-    <div class="wrap">
-      <p class="eyebrow reveal">Se a gente fosse um mapa</p>
-      <h2 class="script md reveal d1" style="margin-bottom:32px">os nossos lugares</h2>
-      <ol class="places reveal d2" id="placeList"></ol>
-    </div>
-  </section>
-
   <div class="divider reveal"><span>✦</span></div>
 
   <!-- MÓDULO 5 -->
@@ -1552,15 +1543,6 @@ var HAND_LETTER = {
   name : "Jose Ernesto"
 };
 
-/* 5) Os lugares. Troque pelos nomes de verdade dos que eu não sabia. */
-var PLACES = [
-  { name:"Colégio Diocesano",  note:"O Halloween. Foi ali que a nossa história parou de ser conversa e virou história." },
-  { name:"A mesa do pedido",   note:"Onde chegou um brownie escrito com calda de chocolate e você disse sim." },
-  { name:"Exporato",           note:"A primeira de muitas. O Crato inteiro passando e eu só olhando pra você." },
-  { name:"Nossa primeira viagem", note:"Onde o painel dizia \"sorria, você está sendo amado\" — e naquele dia era literalmente sobre você." },
-  { name:"Cariri",             note:"Crato, Juazeiro, o caminho entre os dois. Virou tudo nosso sem a gente combinar." }
-];
-
 /* 6) O que ainda falta viver. Reescreva com o que VOCÊ quer de verdade. */
 var FUTURE = [
   "Voltar naquela viagem, só que sem pressa nenhuma",
@@ -1674,15 +1656,9 @@ $('.env-hero').addEventListener('click', function(){
 })();
 
 /* ══════════════════════════════════════════════════════════════
-   LUGARES E FUTURO
+   O QUE AINDA FALTA
    ══════════════════════════════════════════════════════════════ */
 (function(){
-  var pl = $('#placeList');
-  if(pl) PLACES.forEach(function(p){
-    var li = document.createElement('li');
-    li.innerHTML = '<div class="pn">' + p.name + '</div><div class="pd">' + p.note + '</div>';
-    pl.appendChild(li);
-  });
   var fu = $('#futureList');
   if(fu) FUTURE.forEach(function(t, i){
     var li = document.createElement('li');
