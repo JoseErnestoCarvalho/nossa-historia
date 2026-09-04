@@ -1385,7 +1385,11 @@ var SLIDES = [
   ['Nossa história é feita de','pequenos instantes','mágicos...'],
   ['Deslize para reviver','nossa jornada...','']
 ];
-var SLIDE_MS = 4200;
+var SLIDE_MS    = 5000;   /* tempo de leitura de cada frase */
+var SLIDE_MS_RM = 3200;   /* com "reduzir movimento" o texto aparece na hora,
+                             mas continua precisando ser lido — antes isso
+                             virava 0,7s e as frases passavam voando */
+var lastAdvance = 0;
 var intro=$('#intro'), stLoad=$('#stLoad'), stStart=$('#stStart'), stStory=$('#stStory'),
     slot=$('#storySlot'), segbar=$('#segbar'), tapHint=$('#tapHint'),
     hint=$('#scrollHint'), feed=$('#feed'), player=$('#player');
@@ -1429,10 +1433,17 @@ function fillSeg(i,ms){
   cur.style.transition='width '+ms+'ms linear'; cur.style.width='100%';
 }
 function next(){
+  /* no celular um toque pode gerar um clique fantasma logo depois; sem esta
+     guarda ele pulava a frase seguinte junto */
+  var agora = Date.now();
+  if(agora - lastAdvance < 800) return;
+  lastAdvance = agora;
+
   clearTimeout(timer); idx++;
   if(idx>=SLIDES.length){ finish(); return }
-  renderSlide(idx); fillSeg(idx, RM?600:SLIDE_MS);
-  timer=setTimeout(next, RM?700:SLIDE_MS);
+  var dur = RM ? SLIDE_MS_RM : SLIDE_MS;
+  renderSlide(idx); fillSeg(idx, dur);
+  timer = setTimeout(next, dur);
 }
 intro.addEventListener('click', function(e){
   if(e.target.closest('#btnStart')) return;
