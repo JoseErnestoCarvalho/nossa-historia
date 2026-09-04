@@ -1346,10 +1346,15 @@ function play(fade){
     toast('Carregando a música... 🎵');
     return;
   }
-  if(fade){ song.volume=0 }
+  if(fade){ song.volume = 0 }
+  else if(song.volume < .05){ song.volume = .85 }   // o destravamento zera o volume
   var p = song.play();
   if(p && p.then) p.then(function(){ icons(true); if(fade) fadeTo(.85,2400) })
-    .catch(function(){ icons(false); song.volume=.85; if(!fade) toast('Toque no ▶ mais uma vez pra liberar o som 🎧') });
+    .catch(function(){
+      icons(false); song.volume = .85;
+      toast('Toque no ▶ aqui em cima pra ouvir 🎧');
+      if(btn1) btn1.classList.add('pulse');
+    });
   else icons(true);
 }
 function pause(){ if(song){ song.pause(); icons(false) } }
